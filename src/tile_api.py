@@ -37,7 +37,9 @@ class TileApi:
         response = fetcher()
 
         if not response.ok:
-            raise RuntimeError(f"response not ok: {response.status_code}, {response.text}")
+            raise RuntimeError(
+                f"response not ok: {response.status_code}, {response.text}"
+            )
 
         content_type = response.headers.get("content-type")
         if content_type != "application/json":

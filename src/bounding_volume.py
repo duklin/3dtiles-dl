@@ -14,16 +14,20 @@ class OrientedBoundingBox:
         halfy = np.array(spec["box"][6:9])
         halfz = np.array(spec["box"][9:12])
 
-        return OrientedBoundingBox(np.stack((
-            center - halfx - halfy - halfz,
-            center + halfx - halfy - halfz,
-            center + halfx + halfy - halfz,
-            center - halfx + halfy - halfz,
-            center - halfx - halfy + halfz,
-            center + halfx - halfy + halfz,
-            center + halfx + halfy + halfz,
-            center - halfx + halfy + halfz,
-        )))
+        return OrientedBoundingBox(
+            np.stack(
+                (
+                    center - halfx - halfy - halfz,
+                    center + halfx - halfy - halfz,
+                    center + halfx + halfy - halfz,
+                    center - halfx + halfy - halfz,
+                    center - halfx - halfy + halfz,
+                    center + halfx - halfy + halfz,
+                    center + halfx + halfy + halfz,
+                    center - halfx + halfy + halfz,
+                )
+            )
+        )
 
 
 class Sphere:
@@ -35,7 +39,7 @@ class Sphere:
     def from_obb(obb):
         return Sphere(
             0.5 * (obb.vertices[0] + obb.vertices[6]),
-            0.5 * np.linalg.norm(obb.vertices[6] - obb.vertices[0])
+            0.5 * np.linalg.norm(obb.vertices[6] - obb.vertices[0]),
         )
 
     def intersects(self, other):
